@@ -1,0 +1,105 @@
+head	1.2;
+access;
+symbols;
+locks;
+comment	@// @;
+
+
+1.2
+date	2021.09.26.17.35.44;	author -;	state -;
+branches;
+next	1.1;
+
+1.1
+date	2019.12.13.02.19.23;	author -;	state -;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.2
+log
+@-
+@
+text
+@// $Id: scanner.cpp,v 1.1 2019-12-12 18:19:23-08 - - $
+
+#include <cassert>
+#include <iostream>
+#include <locale>
+#include <stdexcept>
+#include <type_traits>
+#include <unordered_map>
+using namespace std;
+
+#include "scanner.h"
+#include "debug.h"
+
+char scanner::get() {
+   if (not good()) throw runtime_error ("scanner::get() past EOF"); 
+   int currchar {nextchar};
+   nextchar = instream.get();
+   return char (currchar);
+}
+
+token scanner::scan() {
+   while (good() and isspace (nextchar)) get();
+   if (not good()) return {tsymbol::SCANEOF};
+   if (nextchar == '_' or isdigit (nextchar)) {
+      token result {tsymbol::NUMBER, {get()}};
+      while (good() and isdigit (nextchar)) result.lexinfo += get();
+      return result;
+   }
+   return {tsymbol::OPERATOR, {get()}};
+}
+
+ostream& operator<< (ostream& out, tsymbol symbol) {
+   const char* sym_name {""};
+   switch (symbol) {
+      case tsymbol::NUMBER  : sym_name = "NUMBER"  ; break;
+      case tsymbol::OPERATOR: sym_name = "OPERATOR"; break;
+      case tsymbol::SCANEOF : sym_name = "SCANEOF" ; break;
+      default               : assert (false)       ; break;
+   }
+   return out << sym_name;
+}
+
+ostream& operator<< (ostream& out, const token& token) {
+   out << "{" << token.symbol << ", \"" << token.lexinfo << "\"}";
+   return out;
+}
+
+@
+
+
+1.1
+log
+@-
+@
+text
+@d1 1
+a1 1
+// $Id: scanner.cpp,v 1.21 2019-04-05 14:36:05-07 - - $
+d16 1
+a16 1
+   char currchar = nextchar;
+d18 1
+a18 1
+   return currchar;
+d33 8
+a40 11
+   struct hasher {
+      auto operator() (tsymbol sym) const {
+         return static_cast<underlying_type<tsymbol>::type> (sym);
+      }
+   };
+   static const unordered_map<tsymbol,string,hasher> map {
+      {tsymbol::NUMBER  , "NUMBER"  },
+      {tsymbol::OPERATOR, "OPERATOR"},
+      {tsymbol::SCANEOF , "SCANEOF" },
+   };
+   return out << map.at(symbol);
+@
