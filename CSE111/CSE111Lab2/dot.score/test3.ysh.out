@@ -1,0 +1,43 @@
+./yshell build Oct 30 2021 21:54:37
+% mkdir dir
+making entries
+mkdir done
+% cd dir
+% mkdir dir2
+making entries
+mkdir done
+% mkdir dir3
+making entries
+mkdir done
+% cd dir3
+% pwd
+/dir/dir3/
+% make file with stuff
+past entries
+% make another file with stuff
+past entries
+% cat fle another
+cat: fle: No such file or directory
+% echo what happened?  the previous command is bad
+what happened? the previous command is bad
+% prompt ysh:
+prompt ls .
+prompt ls ..
+/dir/
+/dir/:
+     2      0 ./
+     1      0 ../
+     3      0 dir2/
+     4      0 dir3/
+prompt lsr /
+/dir/dir3/:
+     4      0 ./
+     2      0 ../
+     6     13 another
+     5      9 file
+prompt # Note the error in fle above, it may error out at that
+prompt # point or print another.
+prompt # But the command after the failed cat must be executed.
+prompt # $Id: test3.ysh,v 1.1 2013-01-02 19:11:43-08 - - $
+prompt ^D
+yshell: exit(1)

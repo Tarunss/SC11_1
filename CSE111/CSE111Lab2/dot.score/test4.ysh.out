@@ -1,0 +1,40 @@
+./yshell build Oct 30 2021 21:54:37
+% mkdir foo
+making entries
+mkdir done
+% mkdir foo/bar
+making entries
+mkdir done
+% mkdir foo/bar/baz
+making entries
+mkdir done
+% make foo/bar/baz/file with this
+past entries
+% mkdir this/mkdir/should/error/out
+making entries
+mkdir done
+% make foo/bar
+past entries
+mkdir: foo/bar: entry already exists
+% # make foo/bar should fail because it is a directory
+% lsr /
+/:
+     2      0 foo/
+     3      0 foo/bar/
+     4      0 foo/bar/baz/
+     5      8 foo/bar/baz/file
+     6      0 this/mkdir/should/error/out/
+% cd foo
+% make file8 nine ten eleven
+past entries
+% cat file8
+nine ten eleven
+% cd /
+% lsr /
+/:
+     2      0 foo/
+     3      0 foo/bar/
+     4      0 foo/bar/baz/
+     5      8 foo/bar/baz/file
+     6      0 this/mkdir/should/error/out/
+% lsr foo foo/bar

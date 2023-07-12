@@ -1,0 +1,8 @@
+./yshell build Oct 30 2021 21:54:37
+% prompt this is my prompt:
+prompt this is my ls /
+/:
+prompt this is my ls
+/:
+prompt this is my exit 5
+yshell: exit(5)
