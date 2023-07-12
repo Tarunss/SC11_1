@@ -1,0 +1,18 @@
+DESCRIPTION
+------------------------------------------------------------------
+This project implements a client server application, 
+mainly using sockets. A majority of the code has been
+provided by Professor Mackey, but files that have been 
+changed include:
+- cxi.cpp
+- cxid.cpp
+
+Functions that have been added to these files include 
+implementations of RM, GET, and PUT.
+
+All of the code modified by me is located in the files
+listed above.
+I have read and understood the UC Santa Cruz
+Academic Misconduct Policy for Undergraduates.
+https://ue.ucsc.edu/academic-misconduct.html
+Tarun Sohal --tsohal@ucsc.edu
